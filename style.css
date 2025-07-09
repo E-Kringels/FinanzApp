@@ -1,0 +1,627 @@
+
+/* CSS Custom Properties (Variablen) */
+:root {
+    /* Farbpalette */
+    --color-dark-bg: #1a1a1a;
+    --color-container-bg: #2b2b2b;
+    --color-section-bg: #333333;
+    --color-input-bg: #3f3f3f;
+    --color-header-bg: #4a4a4a;
+    --color-border-dark: #3a3a3a;
+    --color-border-light: #5a5a5a;
+
+    --color-accent: #f7b731;
+    --color-accent-rgb: 247, 183, 49;
+
+    --color-text-light: #e0e0e0;
+    --color-text-medium: #b0b0b0;
+    --color-text-dark: #1a1a1a;
+    --color-footer-text: #888;
+
+    --color-success: #5cb85c;
+    --color-danger: #d9534f;
+
+    /* Abstände / Radien */
+    --spacing-xs: 5px;
+    --spacing-s: 10px;
+    --spacing-m: 15px;
+    --spacing-l: 25px;
+    --spacing-xl: 40px;
+
+    --radius-s: 8px;
+    --radius-m: 10px;
+    --radius-l: 15px;
+    --radius-xl: 20px;
+
+    /* Schatten */
+    --shadow-sm: 0 2px 5px rgba(0, 0, 0, 0.15);
+    --shadow-md: 0 5px 15px rgba(0, 0, 0, 0.2);
+    --shadow-lg: 0 15px 40px rgba(0, 0, 0, 0.4);
+    --shadow-accent: 0 6px 15px rgba(var(--color-accent-rgb), 0.4);
+    --shadow-footer: 0 -5px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Globale Anpassungen und Allgemeines Body-Styling */
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    background-color: var(--color-dark-bg);
+    color: var(--color-text-light);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    min-height: 100vh;
+    box-sizing: border-box;
+    overflow-x: hidden;
+    padding-bottom: var(--spacing-xl);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Entferne Standard-Fokus-Outline und ersetze sie durch ein Custom-Styling */
+:focus {
+    outline: none;
+}
+
+/* Standard-Absatz-Styling */
+p {
+    margin-top: 0;
+    margin-bottom: var(--spacing-m);
+}
+p:last-child {
+    margin-bottom: 0;
+}
+
+
+/* Haupt-Container der Anwendung */
+.container {
+    background-color: var(--color-container-bg);
+    padding: var(--spacing-xl);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-lg);
+    max-width: 700px;
+    width: 90%;
+    margin: var(--spacing-xl) auto;
+    border: 1px solid var(--color-border-dark);
+    flex-shrink: 0;
+    box-sizing: border-box;
+}
+
+/* Job-Navigation (Hauptjob/Nebenjob) */
+.job-navigation {
+    text-align: center;
+    margin-bottom: var(--spacing-xl);
+    padding-bottom: var(--spacing-l);
+    border-bottom: 1px solid var(--color-border-dark);
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-m);
+}
+.job-navigation button {
+    background-color: var(--color-header-bg);
+    color: var(--color-text-light);
+    border: none;
+    padding: 13px 28px;
+    border-radius: var(--radius-l);
+    cursor: pointer;
+    font-size: 1.08em;
+    font-weight: 600;
+    margin: 0;
+    transition: all 0.3s ease;
+    box-shadow: var(--shadow-sm);
+}
+.job-navigation button.active {
+    background-color: var(--color-accent);
+    color: var(--color-text-dark);
+    box-shadow: var(--shadow-accent);
+    transform: translateY(-3px);
+}
+.job-navigation button:hover:not(.active) {
+    background-color: var(--color-border-light);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Haupt-Navigation für Ansichten (Arbeitszeiten, Kosten, Ergebnis) */
+.main-navigation {
+    display: flex;
+    justify-content: space-around;
+    margin-top: var(--spacing-l);
+    margin-bottom: var(--spacing-xl);
+    padding: var(--spacing-s);
+    background-color: var(--color-border-dark);
+    border-radius: var(--radius-l);
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+.main-navigation button {
+    flex-grow: 1;
+    background-color: transparent;
+    color: var(--color-text-light);
+    border: none;
+    padding: 12px 25px;
+    border-radius: var(--radius-m);
+    cursor: pointer;
+    font-size: 1.1em;
+    font-weight: 600;
+    margin: 0 var(--spacing-s);
+    transition: all 0.3s ease;
+    box-shadow: none;
+}
+.main-navigation button.active {
+    background-color: var(--color-accent);
+    color: var(--color-text-dark);
+    box-shadow: var(--shadow-sm);
+    transform: none;
+}
+.main-navigation button:hover:not(.active) {
+    background-color: rgba(var(--color-accent-rgb), 0.2);
+    transform: none;
+    box-shadow: none;
+}
+
+/* Überschriften */
+h1 {
+    color: var(--color-accent);
+    text-align: center;
+    margin-bottom: var(--spacing-xl);
+    font-weight: 700;
+    letter-spacing: -0.8px;
+    font-size: 2.4em;
+    margin-top: 0;
+    line-height: 1.2;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+/* Ansichts-Container (Arbeitszeit, Kosten, Ergebnis) */
+.content-view {
+    transition: opacity 0.5s ease-in-out, transform 0.5s ease;
+    opacity: 0;
+    transform: translateY(20px);
+    pointer-events: none;
+    display: none;
+}
+
+.content-view.active {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+    display: block;
+    background-color: #363636;
+    border-radius: var(--radius-l);
+    padding: var(--spacing-l);
+    margin-bottom: var(--spacing-l);
+    box-shadow: var(--shadow-md);
+}
+
+/* Collapsible Section Styling */
+.collapsible-section {
+    margin-bottom: var(--spacing-l);
+    border: 1px solid var(--color-border-dark);
+    border-radius: var(--radius-l);
+    background-color: var(--color-section-bg);
+    box-shadow: var(--shadow-md);
+    overflow: hidden;
+}
+
+.collapsible-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-m) var(--spacing-l);
+    background-color: var(--color-header-bg);
+    border-bottom: 1px solid var(--color-border-light);
+    cursor: pointer;
+    border-radius: var(--radius-l) var(--radius-l) 0 0;
+    transition: background-color 0.3s ease;
+}
+
+.collapsible-header:hover {
+    background-color: var(--color-border-light);
+}
+
+.collapsible-header h2 {
+    color: var(--color-accent);
+    margin: 0;
+    font-size: 1.6em;
+    font-weight: 600;
+    border-bottom: none;
+    padding-bottom: 0;
+    text-align: left;
+    text-shadow: 0 0.5px 2px rgba(0, 0, 0, 0.2);
+}
+
+.collapse-icon {
+    font-size: 1.5em;
+    color: var(--color-accent);
+    transition: transform 0.3s ease;
+}
+
+.collapsible-header.collapsed .collapse-icon {
+    transform: rotate(-90deg);
+}
+
+.collapsible-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease-out;
+    padding: 0 var(--spacing-l);
+    background-color: var(--color-input-bg);
+    border-bottom-left-radius: var(--radius-l);
+    border-bottom-right-radius: var(--radius-l);
+}
+
+.collapsible-content.active {
+    max-height: 1000px;
+    padding: var(--spacing-l);
+}
+
+/* Anpassungen für die Buttons und Summaries, die jetzt im collapsible-content liegen */
+.collapsible-content .add-remove-btn {
+    margin-top: var(--spacing-m);
+    margin-bottom: var(--spacing-m);
+}
+
+
+/* Labels für Eingabefelder */
+label {
+    display: block;
+    margin-bottom: var(--spacing-s);
+    font-weight: 600;
+    color: var(--color-text-medium);
+    font-size: 0.95em;
+}
+
+/* Allgemeine Eingabefelder & Select-Feld */
+input[type="number"],
+input[type="date"],
+input[type="text"],
+select {
+    width: calc(100% - 28px);
+    padding: 14px;
+    margin-bottom: var(--spacing-xl);
+    border: 1px solid var(--color-border-light);
+    border-radius: var(--radius-m);
+    font-size: 1.08em;
+    color: var(--color-text-light);
+    background-color: var(--color-input-bg);
+    transition: all 0.3s ease;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-image: url('data:image/svg+xml;utf8,<svg fill="%23e0e0e0" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>');
+    background-repeat: no-repeat;
+    background-position: right 15px center;
+    background-size: 18px;
+    cursor: pointer;
+}
+input[type="number"]:focus,
+input[type="date"]:focus,
+input[type="text"]:focus,
+select:focus {
+    border-color: var(--color-accent);
+    box-shadow: 0 0 0 4px rgba(var(--color-accent-rgb), 0.3);
+}
+/* Placeholder Farbe */
+input::placeholder {
+    color: var(--color-text-medium);
+    opacity: 0.7;
+}
+
+
+/* Zeilen für dynamische Einträge (Arbeitszeiten, Kosten, Nebenkosten) */
+.entry-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 18px;
+    flex-wrap: wrap;
+    gap: var(--spacing-s);
+    padding: var(--spacing-s);
+    border-radius: var(--radius-s);
+    background-color: var(--color-input-bg);
+    box-shadow: var(--shadow-sm);
+}
+.entry-row label {
+    margin-bottom: 0;
+    flex-shrink: 0;
+    min-width: 70px;
+    color: var(--color-text-medium);
+}
+.entry-row input {
+    margin-bottom: 0;
+    flex-grow: 1;
+    background-color: var(--color-header-bg);
+    border: 1px solid var(--color-border-light);
+}
+.entry-row input[type="number"] {
+    width: 100px;
+    min-width: 80px;
+    flex-grow: 0;
+}
+.entry-row input[type="text"] {
+    flex-grow: 2;
+}
+
+/* === Scrollbare Bereiche für Arbeitszeiten, Kosten und Nebenkosten === */
+#arbeitszeiten,
+#kosten,
+#nebenkosten {
+    max-height: 250px;
+    overflow-y: auto;
+    padding-right: var(--spacing-s);
+    margin-bottom: var(--spacing-m);
+    border: 1px solid var(--color-border-dark);
+    border-radius: var(--radius-m);
+    background-color: var(--color-container-bg);
+}
+
+/* Stil für die Scrollbar (Webkit-Browser wie Chrome, Safari) */
+#arbeitszeiten::-webkit-scrollbar,
+#kosten::-webkit-scrollbar,
+#nebenkosten::-webkit-scrollbar {
+    width: 8px;
+}
+
+#arbeitszeiten::-webkit-scrollbar-track,
+#kosten::-webkit-scrollbar-track,
+#nebenkosten::-webkit-scrollbar-track {
+    background: var(--color-container-bg);
+    border-radius: var(--radius-m);
+}
+
+#arbeitszeiten::-webkit-scrollbar-thumb,
+#kosten::-webkit-scrollbar-thumb,
+#nebenkosten::-webkit-scrollbar-thumb {
+    background: var(--color-border-light);
+    border-radius: var(--radius-m);
+}
+
+#arbeitszeiten::-webkit-scrollbar-thumb:hover,
+#kosten::-webkit-scrollbar-thumb:hover,
+#nebenkosten::-webkit-scrollbar-thumb:hover {
+    background: #777;
+}
+
+
+/* Add/Remove Buttons (kleinere Buttons in den Zeilen) */
+.add-remove-btn {
+    background-color: var(--color-success);
+    color: white;
+    width: auto;
+    padding: 10px 15px;
+    border-radius: var(--radius-m);
+    font-size: 0.98em;
+    margin-left: var(--spacing-s);
+    box-shadow: none;
+    flex-shrink: 0;
+    transition: all 0.2s ease;
+}
+.add-remove-btn.remove {
+    background-color: var(--color-danger);
+}
+.add-remove-btn:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+}
+.add-remove-btn.remove:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+}
+
+/* Ergebnisbereich */
+.result {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: var(--color-accent);
+    text-align: center;
+    margin-top: var(--spacing-xl);
+    padding: var(--spacing-l);
+    border: 2px solid var(--color-accent);
+    border-radius: var(--radius-l);
+    background-color: var(--color-input-bg);
+    line-height: 1.7;
+    box-shadow: var(--shadow-accent);
+}
+.result strong {
+    font-size: 1.15em;
+}
+/* Negative Ergebnisse werden rot */
+.result strong[style*="#d9534f"] {
+    color: var(--color-danger) !important;
+}
+/* Grünton für positive Werte in der Ergebnisbox explizit setzen */
+.result strong[style*="#5cb85c"] {
+    color: var(--color-success) !important;
+}
+
+
+/* Live-Zusammenfassung (aktueller Verdienst/Kosten) */
+.current-summary {
+    font-size: 1.1em;
+    text-align: right;
+    margin-top: var(--spacing-m);
+    margin-bottom: var(--spacing-xl);
+    color: var(--color-text-medium);
+    padding: 10px 0;
+    border-top: 1px dashed var(--color-border-dark);
+    border-bottom: 1px dashed var(--color-border-dark);
+}
+.current-summary span {
+    font-weight: bold;
+    color: var(--color-accent);
+    font-size: 1.2em;
+}
+
+/* Versteckte Elemente (Dies wird durch showView im JS gesteuert) */
+.hidden {
+    display: none;
+}
+/* Die active Klasse wird durch JS gesetzt und steuert die Sichtbarkeit und Transition */
+/* Die Opacity und Transform Transition ist bereits im .content-view enthalten */
+
+
+/* Zurück-Button im Ergebnisbereich */
+#backButton {
+    background-color: var(--color-header-bg);
+    color: var(--color-text-light);
+    border: none;
+    padding: 15px 30px;
+    border-radius: var(--radius-l);
+    cursor: pointer;
+    font-size: 1.1em;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: var(--shadow-md);
+    margin-top: var(--spacing-xl);
+}
+#backButton:hover {
+    background-color: var(--color-border-dark);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+    transform: translateY(-2px);
+}
+
+/* =========================== */
+/* === FOOTER STYLING === */
+/* =========================== */
+.app-footer {
+    width: 100%;
+    max-width: 700px;
+    text-align: center;
+    padding: var(--spacing-l) var(--spacing-m);
+    font-size: 0.9em;
+    color: var(--color-footer-text);
+    margin-top: auto;
+    background-color: var(--color-dark-bg);
+    border-top: 1px solid var(--color-border-dark);
+    border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+    box-shadow: var(--shadow-footer);
+    box-sizing: border-box;
+}
+
+.app-footer h3 {
+    color: var(--color-accent);
+    margin-top: 0;
+    margin-bottom: var(--spacing-m);
+    font-size: 1.3em;
+    font-weight: 600;
+}
+
+.app-footer p {
+    margin-bottom: var(--spacing-s);
+    line-height: 1.6;
+}
+
+.app-footer a {
+    color: var(--color-accent);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.app-footer a:hover {
+    color: #e6a020;
+    text-decoration: underline;
+}
+
+
+/* Responsive Anpassungen für kleinere Bildschirme */
+@media (max-width: 768px) {
+    body {
+        padding: 0;
+    }
+    .container {
+        padding: var(--spacing-l);
+        margin: var(--spacing-m) auto;
+        border-radius: var(--radius-l);
+        width: 95%;
+    }
+    .job-navigation {
+        flex-direction: column;
+        gap: var(--spacing-s);
+        padding-bottom: var(--spacing-l);
+    }
+    .job-navigation button {
+        padding: 10px 15px;
+        font-size: 0.95em;
+        width: 100%;
+    }
+    .main-navigation {
+        flex-wrap: wrap;
+        gap: var(--spacing-s);
+        padding: var(--spacing-s);
+    }
+    .main-navigation button {
+        padding: 10px 12px;
+        font-size: 0.9em;
+    }
+
+    h1 {
+        font-size: 2em;
+        margin-bottom: var(--spacing-l);
+    }
+    .collapsible-header h2 {
+        font-size: 1.4em;
+    }
+    input[type="number"],
+    input[type="date"],
+    input[type="text"],
+    select {
+        padding: 12px;
+        font-size: 1em;
+        width: calc(100% - 24px);
+    }
+    #backButton {
+        padding: 12px 25px;
+        font-size: 1em;
+    }
+    .entry-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+        padding: 8px;
+    }
+    .entry-row label {
+        min-width: unset;
+        margin-bottom: 0;
+    }
+    .entry-row input {
+        width: 100%;
+        margin-left: 0;
+        margin-bottom: 0;
+    }
+    .entry-row input[type="number"],
+    .entry-row input[type="date"],
+    .entry-row input[type="text"] {
+        width: calc(100% - 20px);
+    }
+    .add-remove-btn {
+        width: 100%;
+        margin-left: 0;
+        margin-top: 10px;
+        padding: 10px 12px;
+    }
+    .result {
+        font-size: 1.2em;
+        padding: 18px;
+    }
+    .current-summary {
+        font-size: 1em;
+    }
+    .app-footer {
+        padding: 20px 15px;
+        border-radius: var(--radius-l) var(--radius-l) 0 0;
+    }
+    #arbeitszeiten,
+    #kosten,
+    #nebenkosten {
+        max-height: 180px;
+    }
+    .collapsible-content.active {
+        padding: 15px;
+    }
+}
+

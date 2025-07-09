@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finanzübersicht: Einkommen & Ausgaben</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Finanzübersicht</h1>
+
+        <div class="main-navigation">
+            <button id="showArbeitszeitBtn" class="active">Arbeitszeiten</button>
+            <button id="showKostenBtn">Kosten</button>
+            <button id="showErgebnisBtn">Ergebnis</button>
+        </div>
+
+        <div id="arbeitszeitAnsicht" class="content-view active">
+            <p>
+                Erfasse hier deinen Stundenlohn, deine gearbeiteten Stunden und deine Steuerklasse.
+            </p>
+
+            <div class="collapsible-section">
+                <div class="collapsible-header" data-target="hauptjob-arbeitszeiten-content">
+                    <h2>Hauptjob: Einkommen erfassen</h2>
+                    <span class="collapse-icon">&#9660;</span>
+                </div>
+                <div id="hauptjob-arbeitszeiten-content" class="collapsible-content active">
+                    <label for="hauptjobStundenlohn">Stundenlohn Hauptjob (€):</label>
+                    <input type="number" id="hauptjobStundenlohn" value="0" min="0">
+
+                    <label for="steuerklasse">Steuerklasse:</label>
+                    <select id="steuerklasse">
+                        <option value="1">I</option>
+                        <option value="2">II</option>
+                        <option value="3">III</option>
+                        <option value="4">IV</option>
+                        <option value="5">V</option>
+                        <option value="6">VI</option>
+                    </select>
+
+                    <div id="hauptjobArbeitszeiten">
+                    </div>
+                    <button class="add-remove-btn" id="addHauptjobArbeitszeitBtn">Tag Hauptjob hinzufügen</button>
+                    <div id="currentHauptjobGehalt" class="current-summary">Aktueller Hauptjob-Verdienst: <span>0.00 €</span></div>
+                </div>
+            </div>
+
+            <div class="collapsible-section">
+                <div class="collapsible-header" data-target="nebenjob-arbeitszeiten-content">
+                    <h2>Nebenjob: Einkommen erfassen</h2>
+                    <span class="collapse-icon">&#9660;</span>
+                </div>
+                <div id="nebenjob-arbeitszeiten-content" class="collapsible-content">
+                    <p>Erfasse hier die Stunden und den Stundenlohn deines Nebenjobs.</p>
+                    <label for="nebenjobStundenlohn">Stundenlohn Nebenjob (€):</label>
+                    <input type="number" id="nebenjobStundenlohn" value="0" min="0">
+
+                    <div id="nebenjobArbeitszeiten">
+                    </div>
+                    <button class="add-remove-btn" id="addNebenjobArbeitszeitBtn">Tag Nebenjob hinzufügen</button>
+                    <div id="currentNebenjobGehalt" class="current-summary">Aktueller Nebenjob-Verdienst: <span>0.00 €</span></div>
+                </div>
+            </div>
+        </div>
+
+
+        <div id="kostenAnsicht" class="content-view hidden">
+            <p>
+                Verwalte hier deine monatlichen Fixkosten und variablen Nebenkosten.
+            </p>
+
+            <div class="collapsible-section">
+                <div class="collapsible-header" data-target="kosten-content">
+                    <h2>Monatliche Kosten</h2>
+                    <span class="collapse-icon">&#9660;</span>
+                </div>
+                <div id="kosten-content" class="collapsible-content active">
+                    <div id="kosten">
+                    </div>
+                    <button class="add-remove-btn" id="addKostenBtn">Kostenpunkt hinzufügen</button>
+                </div>
+            </div>
+            <div id="currentKosten" class="current-summary">Aktuelle Kosten: <span>0.00 €</span></div>
+
+            <div class="collapsible-section">
+                <div class="collapsible-header" data-target="nebenkosten-content">
+                    <h2>Nebenkosten</h2>
+                    <span class="collapse-icon">&#9660;</span>
+                </div>
+                <div id="nebenkosten-content" class="collapsible-content active">
+                    <div id="nebenkosten">
+                    </div>
+                    <button class="add-remove-btn" id="addNebenkostenBtn">Nebenkostenpunkt hinzufügen</button>
+                </div>
+            </div>
+            <div id="currentNebenkosten" class="current-summary">Aktuelle Nebenkosten: <span>0.00 €</span></div>
+        </div>
+
+
+        <div id="ergebnisAnsicht" class="content-view hidden">
+            <h2 id="resultTitle">Deine Finanzübersicht</h2>
+            <div id="ergebnis" class="result"></div>
+            <button id="backButton">Zurück zur Eingabe</button>
+        </div>
+
+    </div>
+    <script src="script.js"></script>
+
+    <footer class="app-footer">
+        <h3>Impressum</h3>
+        <p>
+            Bremen, Deutschland<br>
+            E-Mail: <a href="mailto:Tech-Ekg@gmx.de">Tech-Ekg@gmx.de</a>
+        </p>
+        <p>&copy; 2025 [E.kringels]. Alle Rechte vorbehalten.</p>
+    </footer>
+</body>
+</html>
