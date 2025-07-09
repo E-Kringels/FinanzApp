@@ -1,21 +1,20 @@
-
 /* CSS Custom Properties (Variablen) */
 :root {
-    /* Farbpalette */
+    /* Farbpalette - Anpassungen für mehr Transparenz und Glanz */
     --color-dark-bg: #1a1a1a;
-    --color-container-bg: #2b2b2b;
-    --color-section-bg: #333333;
-    --color-input-bg: #3f3f3f;
-    --color-header-bg: #4a4a4a;
+    --color-container-base: 43, 43, 43; /* RGB-Werte für #2b2b2b */
+    --color-section-base: 51, 51, 51; /* RGB-Werte für #333333 */
+    --color-input-base: 63, 63, 63; /* RGB-Werte für #3f3f3f */
+    --color-header-base: 74, 74, 74; /* RGB-Werte für #4a4a4a */
     --color-border-dark: #3a3a3a;
     --color-border-light: #5a5a5a;
 
-    --color-accent: #f7b731;
+    --color-accent: #f7b731; /* Golden */
     --color-accent-rgb: 247, 183, 49;
 
     --color-text-light: #e0e0e0;
     --color-text-medium: #b0b0b0;
-    --color-text-dark: #1a1a1a;
+    --color-text-dark: #1a1a1a; /* Dunkler Text für goldene Buttons */
     --color-footer-text: #888;
 
     --color-success: #5cb85c;
@@ -33,12 +32,12 @@
     --radius-l: 15px;
     --radius-xl: 20px;
 
-    /* Schatten */
-    --shadow-sm: 0 2px 5px rgba(0, 0, 0, 0.15);
-    --shadow-md: 0 5px 15px rgba(0, 0, 0, 0.2);
-    --shadow-lg: 0 15px 40px rgba(0, 0, 0, 0.4);
-    --shadow-accent: 0 6px 15px rgba(var(--color-accent-rgb), 0.4);
-    --shadow-footer: 0 -5px 20px rgba(0, 0, 0, 0.2);
+    /* Schatten - leicht angepasst für mehr Tiefe und Glanz */
+    --shadow-sm: 0 2px 5px rgba(0, 0, 0, 0.2);
+    --shadow-md: 0 5px 20px rgba(0, 0, 0, 0.4); /* Etwas stärker */
+    --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.6); /* Noch stärker */
+    --shadow-accent: 0 8px 20px rgba(var(--color-accent-rgb), 0.5); /* Intensiverer Glanz */
+    --shadow-footer: 0 -8px 25px rgba(0, 0, 0, 0.3);
 }
 
 /* Globale Anpassungen und Allgemeines Body-Styling */
@@ -49,7 +48,6 @@ html {
 body {
     font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
-    background-color: var(--color-dark-bg);
     color: var(--color-text-light);
     display: flex;
     flex-direction: column;
@@ -62,35 +60,65 @@ body {
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+
+    /* HINTERGRUND-STYLES */
+    background-image: url('finanz-hintergrund.jpg'); /* PFAD ZU DEINEM BILD ANPASSEN */
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed; /* Parallax-Effekt beim Scrollen */
+
+    position: relative; /* Wichtig für das Pseudo-Element des Overlays */
+    z-index: 1; /* Stellt sicher, dass der Body-Inhalt über dem Overlay liegt */
+}
+
+/* DUNKLES OVERLAY - Noch etwas subtiler */
+body::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Angepasster dunkler Verlauf, der zu deinen Variablen passt - etwas leichter */
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.4));
+    z-index: -1; /* Liegt unter dem Inhalt des Body */
 }
 
 /* Entferne Standard-Fokus-Outline und ersetze sie durch ein Custom-Styling */
 :focus {
     outline: none;
+    border-color: var(--color-accent) !important; /* Wichtig für Fokus-Feedback */
+    box-shadow: 0 0 0 5px rgba(var(--color-accent-rgb), 0.4) !important; /* Stärkerer, goldener Fokus-Schatten */
 }
 
 /* Standard-Absatz-Styling */
 p {
     margin-top: 0;
     margin-bottom: var(--spacing-m);
+    /* Leichter Textschatten für bessere Lesbarkeit auf transparentem Hintergrund */
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
 }
 p:last-child {
     margin-bottom: 0;
 }
 
-
 /* Haupt-Container der Anwendung */
 .container {
-    background-color: var(--color-container-bg);
+    /* Hintergrundfarbe mit deutlich mehr Transparenz (z.B. 75%) */
+    background-color: rgba(var(--color-container-base), 0.75);
     padding: var(--spacing-xl);
     border-radius: var(--radius-xl);
-    box-shadow: var(--shadow-lg);
+    /* Zusätzlicher, subtiler goldener Glanz für den Hauptcontainer */
+    box-shadow: var(--shadow-lg), 0 0 40px rgba(var(--color-accent-rgb), 0.25); /* Noch größer und etwas sichtbarer */
     max-width: 700px;
     width: 90%;
     margin: var(--spacing-xl) auto;
-    border: 1px solid var(--color-border-dark);
+    border: 1px solid rgba(var(--color-border-dark), 0.6); /* Auch Rahmen transparenter */
     flex-shrink: 0;
     box-sizing: border-box;
+    backdrop-filter: blur(2px); /* Subtiler Blur-Effekt für durchscheinenden Hintergrund */
+    -webkit-backdrop-filter: blur(2px); /* Für Safari */
 }
 
 /* Job-Navigation (Hauptjob/Nebenjob) */
@@ -98,13 +126,13 @@ p:last-child {
     text-align: center;
     margin-bottom: var(--spacing-xl);
     padding-bottom: var(--spacing-l);
-    border-bottom: 1px solid var(--color-border-dark);
+    border-bottom: 1px solid rgba(var(--color-border-dark), 0.5); /* Rahmen transparenter */
     display: flex;
     justify-content: center;
     gap: var(--spacing-m);
 }
 .job-navigation button {
-    background-color: var(--color-header-bg);
+    background-color: rgba(var(--color-header-base), 0.8); /* Etwas transparenter */
     color: var(--color-text-light);
     border: none;
     padding: 13px 28px;
@@ -123,9 +151,9 @@ p:last-child {
     transform: translateY(-3px);
 }
 .job-navigation button:hover:not(.active) {
-    background-color: var(--color-border-light);
+    background-color: rgba(var(--color-border-light), 0.6); /* Etwas transparenter im Hover */
     transform: translateY(-1px);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4); /* Schatten stärker */
 }
 
 /* Haupt-Navigation für Ansichten (Arbeitszeiten, Kosten, Ergebnis) */
@@ -135,9 +163,9 @@ p:last-child {
     margin-top: var(--spacing-l);
     margin-bottom: var(--spacing-xl);
     padding: var(--spacing-s);
-    background-color: var(--color-border-dark);
+    background-color: rgba(var(--color-border-dark), 0.7); /* Transparenter */
     border-radius: var(--radius-l);
-    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.3);
+    box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.4); /* Etwas tieferer inset-Schatten */
 }
 .main-navigation button {
     flex-grow: 1;
@@ -160,7 +188,7 @@ p:last-child {
     transform: none;
 }
 .main-navigation button:hover:not(.active) {
-    background-color: rgba(var(--color-accent-rgb), 0.2);
+    background-color: rgba(var(--color-accent-rgb), 0.25); /* Etwas sichtbarer im Hover */
     transform: none;
     box-shadow: none;
 }
@@ -175,7 +203,7 @@ h1 {
     font-size: 2.4em;
     margin-top: 0;
     line-height: 1.2;
-    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.5), 0 0 10px rgba(var(--color-accent-rgb), 0.3); /* Stärkerer Schatten + leichter Gold-Glow */
 }
 
 /* Ansichts-Container (Arbeitszeit, Kosten, Ergebnis) */
@@ -192,21 +220,28 @@ h1 {
     transform: translateY(0);
     pointer-events: auto;
     display: block;
-    background-color: #363636;
+    /* Hintergrundfarbe mit mehr Transparenz (z.B. 85%) */
+    background-color: rgba(54, 54, 54, 0.85); /* RGB von #363636 */
     border-radius: var(--radius-l);
     padding: var(--spacing-l);
     margin-bottom: var(--spacing-l);
     box-shadow: var(--shadow-md);
+    border: 1px solid rgba(var(--color-border-dark), 0.5); /* Leichterer Rahmen */
+    backdrop-filter: blur(1px); /* Leichter Blur */
+    -webkit-backdrop-filter: blur(1px);
 }
 
 /* Collapsible Section Styling */
 .collapsible-section {
     margin-bottom: var(--spacing-l);
-    border: 1px solid var(--color-border-dark);
+    border: 1px solid rgba(var(--color-border-dark), 0.5); /* Leichterer Rahmen */
     border-radius: var(--radius-l);
-    background-color: var(--color-section-bg);
+    /* Hintergrundfarbe mit mehr Transparenz (z.B. 80%) */
+    background-color: rgba(var(--color-section-base), 0.8);
     box-shadow: var(--shadow-md);
     overflow: hidden;
+    backdrop-filter: blur(1px); /* Leichter Blur */
+    -webkit-backdrop-filter: blur(1px);
 }
 
 .collapsible-header {
@@ -214,15 +249,16 @@ h1 {
     justify-content: space-between;
     align-items: center;
     padding: var(--spacing-m) var(--spacing-l);
-    background-color: var(--color-header-bg);
-    border-bottom: 1px solid var(--color-border-light);
+    /* Hintergrundfarbe mit mehr Transparenz (z.B. 85%) */
+    background-color: rgba(var(--color-header-base), 0.85);
+    border-bottom: 1px solid rgba(var(--color-border-light), 0.6); /* Rahmen transparenter */
     cursor: pointer;
     border-radius: var(--radius-l) var(--radius-l) 0 0;
     transition: background-color 0.3s ease;
 }
 
 .collapsible-header:hover {
-    background-color: var(--color-border-light);
+    background-color: rgba(var(--color-border-light), 0.7); /* Etwas sichtbarer im Hover */
 }
 
 .collapsible-header h2 {
@@ -233,7 +269,7 @@ h1 {
     border-bottom: none;
     padding-bottom: 0;
     text-align: left;
-    text-shadow: 0 0.5px 2px rgba(0, 0, 0, 0.2);
+    text-shadow: 0 0.5px 2px rgba(0, 0, 0, 0.3);
 }
 
 .collapse-icon {
@@ -251,7 +287,8 @@ h1 {
     overflow: hidden;
     transition: max-height 0.4s ease-out;
     padding: 0 var(--spacing-l);
-    background-color: var(--color-input-bg);
+    /* Hintergrundfarbe mit mehr Transparenz (z.B. 80%) */
+    background-color: rgba(var(--color-input-base), 0.8);
     border-bottom-left-radius: var(--radius-l);
     border-bottom-right-radius: var(--radius-l);
 }
@@ -275,6 +312,7 @@ label {
     font-weight: 600;
     color: var(--color-text-medium);
     font-size: 0.95em;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4); /* Leichter Textschatten */
 }
 
 /* Allgemeine Eingabefelder & Select-Feld */
@@ -285,11 +323,12 @@ select {
     width: calc(100% - 28px);
     padding: 14px;
     margin-bottom: var(--spacing-xl);
-    border: 1px solid var(--color-border-light);
+    border: 1px solid rgba(var(--color-border-light), 0.7); /* Rahmen transparenter */
     border-radius: var(--radius-m);
     font-size: 1.08em;
     color: var(--color-text-light);
-    background-color: var(--color-input-bg);
+    /* Hintergrundfarbe mit mehr Transparenz (z.B. 85%) */
+    background-color: rgba(var(--color-input-base), 0.85);
     transition: all 0.3s ease;
     -webkit-appearance: none;
     -moz-appearance: none;
@@ -299,6 +338,7 @@ select {
     background-position: right 15px center;
     background-size: 18px;
     cursor: pointer;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2); /* Dezenter innerer Schatten */
 }
 input[type="number"]:focus,
 input[type="date"]:focus,
@@ -309,8 +349,8 @@ select:focus {
 }
 /* Placeholder Farbe */
 input::placeholder {
-    color: var(--color-text-medium);
-    opacity: 0.7;
+    color: rgba(var(--color-text-medium), 0.8); /* Placeholder auch transparenter */
+    opacity: 1; /* Opacity direkt im rgba steuern */
 }
 
 
@@ -323,8 +363,12 @@ input::placeholder {
     gap: var(--spacing-s);
     padding: var(--spacing-s);
     border-radius: var(--radius-s);
-    background-color: var(--color-input-bg);
+    /* Hintergrundfarbe mit mehr Transparenz (z.B. 75%) */
+    background-color: rgba(var(--color-input-base), 0.75);
     box-shadow: var(--shadow-sm);
+    border: 1px solid rgba(var(--color-border-dark), 0.5); /* Leichterer Rahmen */
+    backdrop-filter: blur(0.5px); /* Sehr leichter Blur */
+    -webkit-backdrop-filter: blur(0.5px);
 }
 .entry-row label {
     margin-bottom: 0;
@@ -335,8 +379,9 @@ input::placeholder {
 .entry-row input {
     margin-bottom: 0;
     flex-grow: 1;
-    background-color: var(--color-header-bg);
-    border: 1px solid var(--color-border-light);
+    /* Hintergrundfarbe mit mehr Transparenz (z.B. 80%) */
+    background-color: rgba(var(--color-header-base), 0.8);
+    border: 1px solid rgba(var(--color-border-light), 0.7); /* Rahmen transparenter */
 }
 .entry-row input[type="number"] {
     width: 100px;
@@ -355,36 +400,40 @@ input::placeholder {
     overflow-y: auto;
     padding-right: var(--spacing-s);
     margin-bottom: var(--spacing-m);
-    border: 1px solid var(--color-border-dark);
+    border: 1px solid rgba(var(--color-border-dark), 0.5); /* Rahmen transparenter */
     border-radius: var(--radius-m);
-    background-color: var(--color-container-bg);
+    /* Hintergrundfarbe mit mehr Transparenz (z.B. 70%) */
+    background-color: rgba(var(--color-container-base), 0.7);
+    backdrop-filter: blur(0.8px); /* Leichter Blur */
+    -webkit-backdrop-filter: blur(0.8px);
 }
 
 /* Stil für die Scrollbar (Webkit-Browser wie Chrome, Safari) */
 #arbeitszeiten::-webkit-scrollbar,
 #kosten::-webkit-scrollbar,
 #nebenkosten::-webkit-scrollbar {
-    width: 8px;
+    width: 10px; /* Etwas breiter */
 }
 
 #arbeitszeiten::-webkit-scrollbar-track,
 #kosten::-webkit-scrollbar-track,
 #nebenkosten::-webkit-scrollbar-track {
-    background: var(--color-container-bg);
+    background: rgba(var(--color-container-base), 0.5); /* Deutlich transparenter Track */
     border-radius: var(--radius-m);
 }
 
 #arbeitszeiten::-webkit-scrollbar-thumb,
 #kosten::-webkit-scrollbar-thumb,
 #nebenkosten::-webkit-scrollbar-thumb {
-    background: var(--color-border-light);
+    background: var(--color-accent); /* Daumen in Akzentfarbe */
     border-radius: var(--radius-m);
+    border: 1px solid rgba(var(--color-dark-bg), 0.2); /* Leichter Rand */
 }
 
 #arbeitszeiten::-webkit-scrollbar-thumb:hover,
 #kosten::-webkit-scrollbar-thumb:hover,
 #nebenkosten::-webkit-scrollbar-thumb:hover {
-    background: #777;
+    background: #e6a020; /* Akzentfarbe im Hover etwas dunkler */
 }
 
 
@@ -397,7 +446,7 @@ input::placeholder {
     border-radius: var(--radius-m);
     font-size: 0.98em;
     margin-left: var(--spacing-s);
-    box-shadow: none;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3); /* Dezenter Schatten */
     flex-shrink: 0;
     transition: all 0.2s ease;
 }
@@ -405,12 +454,12 @@ input::placeholder {
     background-color: var(--color-danger);
 }
 .add-remove-btn:hover {
-    opacity: 0.9;
-    transform: translateY(-1px);
+    transform: translateY(-2px); /* Etwas mehr Lift beim Hover */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
 }
 .add-remove-btn.remove:hover {
-    opacity: 0.9;
-    transform: translateY(-1px);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
 }
 
 /* Ergebnisbereich */
@@ -423,20 +472,26 @@ input::placeholder {
     padding: var(--spacing-l);
     border: 2px solid var(--color-accent);
     border-radius: var(--radius-l);
-    background-color: var(--color-input-bg);
+    /* Hintergrundfarbe mit mehr Transparenz (z.B. 80%) */
+    background-color: rgba(var(--color-input-base), 0.8);
     line-height: 1.7;
     box-shadow: var(--shadow-accent);
+    backdrop-filter: blur(1.5px); /* Etwas stärkerer Blur für den Ergebnisbereich */
+    -webkit-backdrop-filter: blur(1.5px);
 }
 .result strong {
     font-size: 1.15em;
+    text-shadow: 0 0 8px rgba(var(--color-accent-rgb), 0.4); /* Leichter Gold-Glow für Zahlen */
 }
 /* Negative Ergebnisse werden rot */
 .result strong[style*="#d9534f"] {
     color: var(--color-danger) !important;
+    text-shadow: 0 0 8px rgba(217, 83, 79, 0.4) !important; /* Rot-Glow */
 }
 /* Grünton für positive Werte in der Ergebnisbox explizit setzen */
 .result strong[style*="#5cb85c"] {
     color: var(--color-success) !important;
+    text-shadow: 0 0 8px rgba(92, 184, 92, 0.4) !important; /* Grün-Glow */
 }
 
 
@@ -448,13 +503,15 @@ input::placeholder {
     margin-bottom: var(--spacing-xl);
     color: var(--color-text-medium);
     padding: 10px 0;
-    border-top: 1px dashed var(--color-border-dark);
-    border-bottom: 1px dashed var(--color-border-dark);
+    border-top: 1px dashed rgba(var(--color-border-dark), 0.6); /* Transparenter */
+    border-bottom: 1px dashed rgba(var(--color-border-dark), 0.6); /* Transparenter */
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4); /* Leichter Textschatten */
 }
 .current-summary span {
     font-weight: bold;
     color: var(--color-accent);
     font-size: 1.2em;
+    text-shadow: 0 0 6px rgba(var(--color-accent-rgb), 0.3); /* Leichter Gold-Glow */
 }
 
 /* Versteckte Elemente (Dies wird durch showView im JS gesteuert) */
@@ -467,7 +524,7 @@ input::placeholder {
 
 /* Zurück-Button im Ergebnisbereich */
 #backButton {
-    background-color: var(--color-header-bg);
+    background-color: rgba(var(--color-header-base), 0.85); /* Etwas transparenter */
     color: var(--color-text-light);
     border: none;
     padding: 15px 30px;
@@ -478,11 +535,12 @@ input::placeholder {
     transition: all 0.3s ease;
     box-shadow: var(--shadow-md);
     margin-top: var(--spacing-xl);
+    border: 1px solid rgba(var(--color-border-light), 0.5); /* Leichter Rahmen */
 }
 #backButton:hover {
-    background-color: var(--color-border-dark);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
-    transform: translateY(-2px);
+    background-color: rgba(var(--color-border-dark), 0.7); /* Etwas transparenter */
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5); /* Stärkerer Schatten */
+    transform: translateY(-3px); /* Stärkerer Lift */
 }
 
 /* =========================== */
@@ -496,11 +554,14 @@ input::placeholder {
     font-size: 0.9em;
     color: var(--color-footer-text);
     margin-top: auto;
-    background-color: var(--color-dark-bg);
-    border-top: 1px solid var(--color-border-dark);
+    /* Hintergrundfarbe mit mehr Transparenz (z.B. 70%) */
+    background-color: rgba(26, 26, 26, 0.7); /* RGB von #1a1a1a (var(--color-dark-bg)) */
+    border-top: 1px solid rgba(var(--color-border-dark), 0.5); /* Rahmen transparenter */
     border-radius: var(--radius-xl) var(--radius-xl) 0 0;
     box-shadow: var(--shadow-footer);
     box-sizing: border-box;
+    backdrop-filter: blur(2px); /* Subtiler Blur-Effekt */
+    -webkit-backdrop-filter: blur(2px);
 }
 
 .app-footer h3 {
@@ -509,22 +570,25 @@ input::placeholder {
     margin-bottom: var(--spacing-m);
     font-size: 1.3em;
     font-weight: 600;
+    text-shadow: 0 0 8px rgba(var(--color-accent-rgb), 0.3); /* Gold-Glow */
 }
 
 .app-footer p {
     margin-bottom: var(--spacing-s);
     line-height: 1.6;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
 }
 
 .app-footer a {
     color: var(--color-accent);
     text-decoration: none;
-    transition: color 0.2s ease;
+    transition: color 0.2s ease, text-shadow 0.2s ease;
 }
 
 .app-footer a:hover {
     color: #e6a020;
     text-decoration: underline;
+    text-shadow: 0 0 5px rgba(var(--color-accent-rgb), 0.6); /* Stärkerer Gold-Glow im Hover */
 }
 
 
@@ -532,12 +596,16 @@ input::placeholder {
 @media (max-width: 768px) {
     body {
         padding: 0;
+        background-attachment: scroll; /* Auf mobilen Geräten fixiertes Bild entfernen, um Performance zu sparen */
     }
     .container {
         padding: var(--spacing-l);
         margin: var(--spacing-m) auto;
         border-radius: var(--radius-l);
         width: 95%;
+        background-color: rgba(var(--color-container-base), 0.8); /* Etwas weniger transparent auf Mobilgeräten */
+        backdrop-filter: none; /* Auf Mobilgeräten Blur entfernen für Performance */
+        -webkit-backdrop-filter: none;
     }
     .job-navigation {
         flex-direction: column;
@@ -614,14 +682,22 @@ input::placeholder {
     .app-footer {
         padding: 20px 15px;
         border-radius: var(--radius-l) var(--radius-l) 0 0;
+        background-color: rgba(26, 26, 26, 0.8); /* Etwas weniger transparent auf Mobilgeräten */
+        backdrop-filter: none; /* Auf Mobilgeräten Blur entfernen für Performance */
+        -webkit-backdrop-filter: none;
     }
     #arbeitszeiten,
     #kosten,
     #nebenkosten {
         max-height: 180px;
+        backdrop-filter: none; /* Auf Mobilgeräten Blur entfernen für Performance */
+        -webkit-backdrop-filter: none;
     }
     .collapsible-content.active {
         padding: 15px;
     }
+    .collapsible-section, .collapsible-header, .collapsible-content, .entry-row, .result {
+        backdrop-filter: none; /* Auch hier Blur entfernen für Mobilgeräte */
+        -webkit-backdrop-filter: none;
+    }
 }
-
